@@ -1,5 +1,6 @@
 import React from "react";
+import Board from "../Board";
 
-const App = () => <div>Hello from React-Boilerplate</div>;
+const App = () => <Board />;
 
 export default App;
