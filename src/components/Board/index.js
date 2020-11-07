@@ -1,24 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Cell from "../Cell";
 import Player from "../Player";
 import Board from "./styled";
+import { GameContext } from "../Store";
 
 export default () => {
-  // TODO: get game from context
-  const game = {
-    initialPosition: 3,
-    columns: 4,
-    cells: [
-      { id: 1, type: "start" },
-      { id: 2, type: "regular" },
-      { id: 3, type: "regular" },
-      { id: 4, type: "blocked" },
-      { id: 5, type: "blocked" },
-      { id: 6, type: "blocked" },
-      { id: 7, type: "regular" },
-      { id: 8, type: "target" },
-    ],
-  };
+  const { game } = useContext(GameContext);
+
+  if (!game) return <div>Loading board</div>;
 
   const activeCell = game.initialPosition;
 
