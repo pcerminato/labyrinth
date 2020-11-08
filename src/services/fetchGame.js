@@ -6,6 +6,7 @@ export default (gameId) => {
   const game = {
     initialPosition: 3,
     columns: 4,
+    maxMovents: 7,
     cells: [
       { id: 1, type: "start" },
       { id: 2, type: "regular" },

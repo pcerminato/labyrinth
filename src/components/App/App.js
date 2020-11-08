@@ -1,10 +1,10 @@
 import React from "react";
-import Board from "../Board";
+import Game from "../Game";
 import { GameContextProvider } from "../Store";
 
 const App = () => (
   <GameContextProvider>
-    <Board />
+    <Game />
   </GameContextProvider>
 );
 
