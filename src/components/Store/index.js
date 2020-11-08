@@ -8,24 +8,32 @@ export const GameContextProvider = ({ children }) => {
   const [gameIsOver, setGameIsOver] = useState(false);
   const [gameIsReady, setGameIsReady] = useState(false);
   const [gameIsWon, setGameIsWon] = useState(false);
+  const [level, setLevel] = useState(1);
+  const [hasNextLevel, setHasNextLevel] = useState(false);
   const [playerPosition, setPlayerPosition] = useState(1);
   const [movementsLeft, setMovementsLeft] = useState();
 
   useEffect(() => {
+    setGameIsReady(false);
     (async () => {
       try {
-        const gameData = await fetchGame(123);
+        const gameData = await fetchGame(level);
         setGame(gameData);
       } catch (error) {
         console.error(error);
       }
     })();
-  }, []);
+  }, [level]);
 
   useEffect(() => {
     if (game) {
+      resetDefaults();
       setPlayerPosition(game.initialPosition);
       setMovementsLeft(game.maxMovents);
+      setLevel(game.level);
+      if (game.nextLevel) {
+        setHasNextLevel(true);
+      }
       setGameIsReady(true);
     }
   }, [game]);
@@ -36,6 +44,7 @@ export const GameContextProvider = ({ children }) => {
     }
   }, [movementsLeft]);
 
+  // resets current game
   const gameReset = () => {
     setGameIsOver(false);
     setGameIsWon(false);
@@ -43,10 +52,17 @@ export const GameContextProvider = ({ children }) => {
     setMovementsLeft(game.maxMovents);
   };
 
-  // TODO
+  const resetDefaults = () => {
+    setGameIsOver(false);
+    setGameIsWon(false);
+    setHasNextLevel(false);
+  };
+
   const moveToNextLevel = () => {
-    console.log("TODO > moveToNextLevel");
-    gameReset();
+    if (game.nextLevel) {
+      gameReset();
+      setLevel(game.nextLevel);
+    }
   };
 
   const values = {
@@ -55,6 +71,8 @@ export const GameContextProvider = ({ children }) => {
     gameIsReady,
     gameIsWon,
     gameReset,
+    hasNextLevel,
+    level,
     movementsLeft,
     moveToNextLevel,
     playerPosition,

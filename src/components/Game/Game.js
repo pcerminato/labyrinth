@@ -13,11 +13,13 @@ export default styled.div`
 
   button.help {
     background: none;
-    margin: 0;
-    padding: 0;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
     color: #c6c6c6;
+  }
+
+  .level {
+    margin-bottom: 10px;
+    text-align: center;
   }
 `;

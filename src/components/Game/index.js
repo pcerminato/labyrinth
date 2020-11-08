@@ -15,6 +15,8 @@ export default () => {
     gameIsOver,
     gameIsReady,
     gameIsWon,
+    hasNextLevel,
+    level,
     movementsLeft,
     moveToNextLevel,
     playerPosition,
@@ -52,6 +54,7 @@ export default () => {
 
   return (
     <Game>
+      <div className="level">Level {level}</div>
       <Board />
       <StatusBar
         isOver={gameIsOver}
@@ -62,7 +65,7 @@ export default () => {
         {gameIsOver || gameIsWon ? (
           <button onClick={gameReset}>Play again</button>
         ) : null}
-        {gameIsWon ? (
+        {gameIsWon && hasNextLevel ? (
           <button onClick={moveToNextLevel}>Next level</button>
         ) : null}
       </OptionsBar>
