@@ -31,17 +31,32 @@ export const GameContextProvider = ({ children }) => {
   }, [game]);
 
   useEffect(() => {
-    if (movementsLeft === 0) {
+    if (movementsLeft === 0 && !gameIsWon) {
       setGameIsOver(true);
     }
   }, [movementsLeft]);
+
+  const gameReset = () => {
+    setGameIsOver(false);
+    setGameIsWon(false);
+    setPlayerPosition(game.initialPosition);
+    setMovementsLeft(game.maxMovents);
+  };
+
+  // TODO
+  const moveToNextLevel = () => {
+    console.log("TODO > moveToNextLevel");
+    gameReset();
+  };
 
   const values = {
     game,
     gameIsOver,
     gameIsReady,
     gameIsWon,
+    gameReset,
     movementsLeft,
+    moveToNextLevel,
     playerPosition,
     setGameIsOver,
     setMovementsLeft,
