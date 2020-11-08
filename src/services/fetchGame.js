@@ -4,7 +4,7 @@
  */
 export default (gameId) => {
   const game = {
-    initialPosition: 3,
+    initialPosition: 1,
     columns: 4,
     maxMovents: 7,
     cells: [
@@ -23,7 +23,7 @@ export default (gameId) => {
       { id: 13, type: "target" },
       { id: 14, type: "regular" },
       { id: 15, type: "blocked" },
-      { id: 16, type: "regular" },
+      { id: 16, type: "blocked" },
     ],
   };
 

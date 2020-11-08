@@ -5,7 +5,7 @@ export default () =>
     direction = undefined
   ) {
     const { columns, cells } = currentGame;
-    let newPosition = currentPosition; // defaults to current
+    let newPosition = undefined; // defaults to undefined
 
     if (direction === "up") {
       const position = currentPosition - columns;

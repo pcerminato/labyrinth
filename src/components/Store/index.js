@@ -5,9 +5,11 @@ export const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
   const [game, setGame] = useState();
+  const [gameIsOver, setGameIsOver] = useState(false);
   const [gameIsReady, setGameIsReady] = useState(false);
+  const [gameIsWon, setGameIsWon] = useState(false);
   const [playerPosition, setPlayerPosition] = useState(1);
-  const [movementsLeft, setMovementsLeft] = useState(0);
+  const [movementsLeft, setMovementsLeft] = useState();
 
   useEffect(() => {
     (async () => {
@@ -28,11 +30,23 @@ export const GameContextProvider = ({ children }) => {
     }
   }, [game]);
 
+  useEffect(() => {
+    if (movementsLeft === 0) {
+      setGameIsOver(true);
+    }
+  }, [movementsLeft]);
+
   const values = {
     game,
+    gameIsOver,
     gameIsReady,
+    gameIsWon,
+    movementsLeft,
     playerPosition,
+    setGameIsOver,
+    setMovementsLeft,
     setPlayerPosition,
+    setGameIsWon,
   };
 
   return <GameContext.Provider value={values}>{children}</GameContext.Provider>;
