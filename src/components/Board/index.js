@@ -5,9 +5,9 @@ import Board from "./styled";
 import { GameContext } from "../Store";
 
 export default () => {
-  const { game, playerPosition } = useContext(GameContext);
+  const { game, gameIsReady, playerPosition } = useContext(GameContext);
 
-  if (!game) return <div>Loading board</div>;
+  if (!gameIsReady) return <div>Loading board</div>;
 
   return (
     <Board columns={game.columns}>

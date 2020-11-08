@@ -5,6 +5,7 @@ export const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
   const [game, setGame] = useState();
+  const [gameIsReady, setGameIsReady] = useState(false);
   const [playerPosition, setPlayerPosition] = useState(1);
   const [movementsLeft, setMovementsLeft] = useState(0);
 
@@ -23,11 +24,13 @@ export const GameContextProvider = ({ children }) => {
     if (game) {
       setPlayerPosition(game.initialPosition);
       setMovementsLeft(game.maxMovents);
+      setGameIsReady(true);
     }
   }, [game]);
 
   const values = {
     game,
+    gameIsReady,
     playerPosition,
     setPlayerPosition,
   };
